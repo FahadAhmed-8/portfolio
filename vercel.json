@@ -3,6 +3,5 @@
   "public": false,
   "buildCommand": "echo 'Static site - no build needed'",
   "outputDirectory": ".",
-  "framework": "static",
-  "env": []
+  "framework": "static"
 }
