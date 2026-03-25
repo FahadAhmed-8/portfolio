@@ -48,6 +48,7 @@
             scroll-behavior: smooth;
             scrollbar-width: thin;
             scrollbar-color: var(--accent) var(--bg-secondary);
+            scroll-snap-type: y mandatory;
         }
 
         body {
@@ -88,35 +89,88 @@
             justify-content: center;
             z-index: 10000;
             transition: opacity 0.6s ease, visibility 0.6s ease;
+            gap: 40px;
         }
         .loader.hidden { opacity: 0; visibility: hidden; }
-        .loader-text {
+
+        /* Rotating Wireframe Cube */
+        .loader-cube {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 8s infinite linear;
+        }
+
+        .loader-cube-face {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--accent);
+            opacity: 0.3;
+        }
+
+        .loader-cube-face:nth-child(1) { transform: translateZ(40px); }
+        .loader-cube-face:nth-child(2) { transform: rotateY(180deg) translateZ(40px); }
+        .loader-cube-face:nth-child(3) { transform: rotateY(90deg) translateZ(40px); }
+        .loader-cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(40px); }
+        .loader-cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(40px); }
+        .loader-cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(40px); }
+
+        @keyframes rotateCube {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* Terminal Boot Sequence */
+        .loader-terminal {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--accent-light);
+            background: rgba(20, 20, 30, 0.8);
+            border: 1px solid var(--accent-dim);
+            border-radius: 8px;
+            padding: 20px;
+            width: 280px;
+            min-height: 120px;
+            line-height: 1.8;
+        }
+
+        .loader-line {
+            opacity: 0;
+            animation: typeLine 0.4s ease forwards;
+        }
+
+        .loader-line:nth-child(1) { animation-delay: 0.2s; }
+        .loader-line:nth-child(2) { animation-delay: 0.8s; }
+        .loader-line:nth-child(3) { animation-delay: 1.4s; }
+        .loader-line:nth-child(4) { animation-delay: 2.0s; }
+
+        .loader-line .status {
+            color: var(--green);
+            font-weight: 600;
+            margin-left: 20px;
+        }
+
+        @keyframes typeLine {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Percentage Counter */
+        .loader-percent {
             font-family: var(--font-mono);
             font-size: 1.1rem;
-            color: var(--accent-light);
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid var(--accent);
-            animation: typing 2s steps(28) forwards, blink 0.7s step-end infinite;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 2px;
+            animation: countUp 2.4s ease-out forwards;
         }
-        .loader-bar {
-            width: 200px; height: 2px;
-            background: var(--bg-tertiary);
-            margin-top: 24px;
-            border-radius: 2px;
-            overflow: hidden;
+
+        @keyframes countUp {
+            0% { content: '0%'; }
+            100% { content: '100%'; }
         }
-        .loader-bar::after {
-            content: '';
-            display: block;
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            animation: load 2s ease forwards;
-        }
-        @keyframes typing { from { width: 0 } to { width: 28ch } }
-        @keyframes blink { 50% { border-color: transparent } }
-        @keyframes load { to { width: 100% } }
 
         /* ===== NAVIGATION ===== */
         nav {
@@ -190,13 +244,51 @@
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
+        /* ===== SECTION SEPARATORS ===== */
+        .section-divider {
+            position: relative;
+            height: 80px;
+            overflow: hidden;
+            background: linear-gradient(180deg, transparent, rgba(99,102,241,0.03), transparent);
+        }
+
+        .divider-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            top: 50%;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.3;
+        }
+
         /* ===== SECTION BASE ===== */
         section {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            min-height: 100vh;
             padding: 120px 40px;
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
+
+        section:nth-child(even) { background: var(--bg-secondary); }
+
+        .section-number {
+            position: absolute;
+            top: 80px;
+            right: 40px;
+            font-family: var(--font-heading);
+            font-size: 6rem;
+            font-weight: 900;
+            color: rgba(99, 102, 241, 0.08);
+            pointer-events: none;
+            letter-spacing: -4px;
+        }
+
         .section-label {
             font-family: var(--font-mono);
             font-size: 0.8rem;
@@ -279,10 +371,20 @@
             0%, 100% { transform: translate(0, 0) scale(1); }
             50% { transform: translate(30px, -30px) scale(1.05); }
         }
+
+        /* Hero Two-Column Layout */
+        .hero-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 800px;
+            max-width: 600px;
         }
         .hero-badge {
             display: inline-flex;
@@ -400,6 +502,96 @@
             color: var(--text-muted);
             margin-top: 4px;
         }
+
+        /* Animated Code Editor Widget */
+        .hero-code-widget {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.8), rgba(25, 25, 35, 0.8));
+            border: 1px solid var(--accent-dim);
+            border-radius: 16px;
+            padding: 24px;
+            overflow: hidden;
+            animation: floatWidget 4s ease-in-out infinite;
+            box-shadow: 0 0 60px rgba(99, 102, 241, 0.2);
+        }
+
+        @keyframes floatWidget {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-20px) rotateX(2deg); }
+        }
+
+        .hero-code-widget::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.1), transparent 50%);
+            pointer-events: none;
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--accent-dim);
+            position: relative;
+            z-index: 1;
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #ff5f57; }
+        .code-dot.yellow { background: #ffbd2e; }
+        .code-dot.green { background: #28c940; }
+
+        .code-filename {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-left: auto;
+        }
+
+        .code-content {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .code-line {
+            opacity: 0;
+            animation: typeCodeLine 0.5s steps(40, end) forwards;
+            white-space: nowrap;
+        }
+
+        .code-line:nth-child(1) { animation-delay: 0.3s; color: var(--text-secondary); }
+        .code-line:nth-child(2) { animation-delay: 0.8s; color: var(--cyan); }
+        .code-line:nth-child(3) { animation-delay: 1.3s; color: var(--text-secondary); }
+        .code-line:nth-child(4) { animation-delay: 1.8s; color: var(--green); }
+        .code-line:nth-child(5) { animation-delay: 2.3s; color: var(--text-secondary); }
+        .code-line:nth-child(6) { animation-delay: 2.8s; color: var(--orange); }
+        .code-line:nth-child(7) { animation-delay: 3.3s; color: var(--text-secondary); }
+
+        @keyframes typeCodeLine {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .code-keyword { color: var(--pink); }
+        .code-string { color: var(--green); }
+        .code-function { color: var(--cyan); }
+        .code-comment { color: var(--text-muted); }
 
         /* ===== ABOUT ===== */
         .about-grid {
@@ -671,56 +863,118 @@
         }
 
         /* ===== ACHIEVEMENTS ===== */
-        .achievements-grid {
+        .achievements-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
         }
-        .achievement-card {
+
+        .achievements-left {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .achievement-large {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 28px;
+            border-radius: var(--radius-lg);
+            padding: 32px;
             display: flex;
-            gap: 16px;
+            gap: 24px;
+            align-items: flex-start;
             transition: all var(--transition);
         }
-        .achievement-card:hover {
-            border-color: var(--border-hover);
+
+        .achievement-large:hover {
+            border-color: var(--accent);
             transform: translateY(-4px);
         }
-        .achievement-icon {
-            width: 48px; height: 48px;
-            min-width: 48px;
-            border-radius: 12px;
+
+        .achievement-large .icon {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.6rem;
         }
-        .achievement-card h4 {
-            font-size: 1rem;
+
+        .achievement-large h4 {
+            font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
         }
-        .achievement-card p {
+
+        .achievement-large p {
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             line-height: 1.6;
         }
 
-        /* ===== CODING PROFILES ===== */
-        .profiles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-top: 32px;
+        .achievements-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
+
+        .achievement-small {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            transition: all var(--transition);
+        }
+
+        .achievement-small:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .achievement-small .icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .achievement-small h5 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .achievement-small p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        /* ===== CODING PROFILES - HORIZONTAL STRIP ===== */
+        .profiles-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 40px;
+        }
+
         .profile-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 24px;
+            padding: 20px;
             text-decoration: none;
             transition: all var(--transition);
             display: flex;
@@ -739,57 +993,153 @@
         }
         .profile-card .platform {
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: var(--text-primary);
         }
         .profile-card .rating {
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
         }
         .profile-card .detail {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
         }
         .profile-card .external-icon {
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             transition: all var(--transition);
         }
         .profile-card:hover .external-icon { color: var(--accent-light); }
 
         /* ===== LEADERSHIP ===== */
+        .leadership-featured {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.05));
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            padding: 48px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+
+        .leadership-featured::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent);
+            border-radius: 50%;
+        }
+
+        .leadership-featured:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.1);
+        }
+
+        .leadership-featured .role {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .leadership-featured .org {
+            color: var(--accent-light);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .leadership-featured .period {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .leadership-featured ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .leadership-featured li {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            padding-left: 24px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .leadership-featured li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-light);
+            font-size: 1.2rem;
+        }
+
         .leadership-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
         }
+
         .leadership-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 32px;
+            padding: 28px;
             transition: all var(--transition);
+            position: relative;
+            padding-left: 48px;
         }
+
+        .leadership-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--accent), transparent);
+            border-radius: 4px 0 0 4px;
+        }
+
         .leadership-card:hover {
             border-color: var(--border-hover);
             transform: translateY(-4px);
         }
         .leadership-card .role {
             font-family: var(--font-heading);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 4px;
         }
         .leadership-card .org {
             color: var(--accent-light);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             margin-bottom: 4px;
         }
         .leadership-card .period {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             margin-bottom: 16px;
         }
@@ -801,8 +1151,8 @@
         }
         .leadership-card li {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            padding-left: 20px;
+            font-size: 0.85rem;
+            padding-left: 16px;
             position: relative;
         }
         .leadership-card li::before {
@@ -810,11 +1160,6 @@
             position: absolute;
             left: 0;
             color: var(--accent-light);
-        }
-        .leadership-highlight {
-            grid-column: 1 / -1;
-            background: linear-gradient(135deg, var(--bg-card), rgba(99,102,241,0.05));
-            border-color: rgba(99,102,241,0.15);
         }
 
         /* ===== CERTIFICATIONS ===== */
@@ -986,8 +1331,28 @@
         .mobile-nav a:hover { color: var(--accent-light); }
 
         /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .hero-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-code-widget {
+                height: 320px;
+            }
+        }
+
         @media (max-width: 900px) {
-            section { padding: 80px 24px; }
+            section {
+                padding: 80px 24px;
+                min-height: auto;
+            }
+
+            .section-number {
+                font-size: 3rem;
+                opacity: 0.04;
+                right: 20px;
+            }
+
             .nav-links { display: none; }
             .hamburger { display: flex; }
             nav { padding: 0 24px; }
@@ -995,8 +1360,10 @@
             .hero-stats { gap: 24px; }
             .hero-stat::after { right: -12px; }
             .projects-grid { grid-template-columns: 1fr; }
-            .leadership-highlight { grid-column: 1; }
+            .achievements-section { grid-template-columns: 1fr; gap: 40px; }
+            .profiles-strip { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
         }
+
         @media (max-width: 600px) {
             .hero-name { letter-spacing: -1.5px; }
             .hero-stats { flex-wrap: wrap; gap: 20px; }
@@ -1004,8 +1371,14 @@
             .hero-actions { flex-direction: column; }
             .btn { justify-content: center; }
             .about-details { grid-template-columns: 1fr; }
-            .profiles-grid { grid-template-columns: 1fr; }
+            .profiles-strip { grid-template-columns: 1fr; }
             .contact-links { flex-direction: column; align-items: center; }
+            .leadership-featured {
+                padding: 32px;
+            }
+            .leadership-featured .role {
+                font-size: 1.4rem;
+            }
         }
 
         /* ===== FLOATING PARTICLES ===== */
@@ -1034,8 +1407,26 @@
 <body>
     <!-- Loading Screen -->
     <div class="loader" id="loader">
-        <div class="loader-text">initializing fahad.dev ...</div>
-        <div class="loader-bar"></div>
+        <!-- Rotating Cube -->
+        <div class="loader-cube">
+            <div class="loader-cube-face"></div>
+            <div class="loader-cube-face"></div>
+            <div class="loader-cube-face"></div>
+            <div class="loader-cube-face"></div>
+            <div class="loader-cube-face"></div>
+            <div class="loader-cube-face"></div>
+        </div>
+
+        <!-- Terminal Boot Sequence -->
+        <div class="loader-terminal">
+            <div class="loader-line">> loading modules...        <span class="status">[done]</span></div>
+            <div class="loader-line">> initializing neural net... <span class="status">[done]</span></div>
+            <div class="loader-line">> compiling portfolio...     <span class="status">[done]</span></div>
+            <div class="loader-line">> fahad.dev ready</div>
+        </div>
+
+        <!-- Percentage Counter -->
+        <div class="loader-percent" id="loaderPercent">0%</div>
     </div>
 
     <!-- Cursor Glow -->
@@ -1074,54 +1465,80 @@
 
     <!-- ===== HERO ===== -->
     <section id="hero">
+        <div class="section-number">01</div>
         <div class="hero-grid-bg"></div>
         <div class="hero-orb hero-orb-1"></div>
         <div class="hero-orb hero-orb-2"></div>
-        <div class="hero-content">
-            <div class="hero-badge reveal">
-                <span class="pulse"></span>
-                Open to Internships & Opportunities
+        <div class="hero-wrapper">
+            <div class="hero-content">
+                <div class="hero-badge reveal">
+                    <span class="pulse"></span>
+                    Open to Internships & Opportunities
+                </div>
+                <h1 class="hero-name reveal reveal-delay-1">
+                    Fahad<br><span class="gradient">Ahmed.</span>
+                </h1>
+                <p class="hero-subtitle reveal reveal-delay-2">
+                    I build <strong>intelligent systems</strong> at the intersection of Data Science and Full-Stack Engineering — turning complex problems into <strong>scalable, production-grade solutions</strong>.
+                </p>
+                <div class="hero-actions reveal reveal-delay-3">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-code"></i> View My Work
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-paper-plane"></i> Get In Touch
+                    </a>
+                    <a href="./Fahad_Ahmed_Resume.pdf" download class="btn btn-secondary">
+                        <i class="fas fa-file-download"></i> Resume
+                    </a>
+                </div>
+                <div class="hero-stats reveal reveal-delay-4">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value" data-count="300">0+</div>
+                        <div class="hero-stat-label">DSA Problems</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">Top 2%</div>
+                        <div class="hero-stat-label">Codeforces Global</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value" data-count="2500">0+</div>
+                        <div class="hero-stat-label">Fest Attendees Led</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value" data-count="150">0+</div>
+                        <div class="hero-stat-label">Team Members Led</div>
+                    </div>
+                </div>
             </div>
-            <h1 class="hero-name reveal reveal-delay-1">
-                Fahad<br><span class="gradient">Ahmed.</span>
-            </h1>
-            <p class="hero-subtitle reveal reveal-delay-2">
-                I build <strong>intelligent systems</strong> at the intersection of Data Science and Full-Stack Engineering — turning complex problems into <strong>scalable, production-grade solutions</strong>.
-            </p>
-            <div class="hero-actions reveal reveal-delay-3">
-                <a href="#projects" class="btn btn-primary">
-                    <i class="fas fa-code"></i> View My Work
-                </a>
-                <a href="#contact" class="btn btn-secondary">
-                    <i class="fas fa-paper-plane"></i> Get In Touch
-                </a>
-                <a href="./Fahad_Ahmed_Resume.pdf" download class="btn btn-secondary">
-                    <i class="fas fa-file-download"></i> Resume
-                </a>
-            </div>
-            <div class="hero-stats reveal reveal-delay-4">
-                <div class="hero-stat">
-                    <div class="hero-stat-value" data-count="300">0+</div>
-                    <div class="hero-stat-label">DSA Problems</div>
+            <div class="hero-code-widget reveal reveal-delay-3">
+                <div class="code-header">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                    <span class="code-filename">main.py</span>
                 </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value">Top 2%</div>
-                    <div class="hero-stat-label">Codeforces Global</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value" data-count="2500">0+</div>
-                    <div class="hero-stat-label">Fest Attendees Led</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value" data-count="150">0+</div>
-                    <div class="hero-stat-label">Team Members Led</div>
+                <div class="code-content">
+                    <div class="code-line"><span class="code-keyword">import</span> tensorflow <span class="code-keyword">as</span> tf</div>
+                    <div class="code-line"><span class="code-keyword">def</span> <span class="code-function">build_model</span>(data):</div>
+                    <div class="code-line">    model = tf.Sequential([...])</div>
+                    <div class="code-line">    <span class="code-keyword">return</span> model.fit()</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="code-comment"># Deploy to production</span></div>
+                    <div class="code-line">prediction = model.predict(x)</div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+    </div>
+
     <!-- ===== ABOUT ===== -->
     <section id="about">
+        <div class="section-number">02</div>
         <div class="section-label reveal">About</div>
         <h2 class="section-title reveal">Building systems that think.</h2>
         <div class="about-grid">
@@ -1161,8 +1578,14 @@
         </div>
     </section>
 
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+    </div>
+
     <!-- ===== EXPERIENCE ===== -->
     <section id="experience">
+        <div class="section-number">03</div>
         <div class="section-label reveal">Experience</div>
         <h2 class="section-title reveal">Where I've worked.</h2>
         <div class="timeline reveal">
@@ -1180,8 +1603,14 @@
         </div>
     </section>
 
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+    </div>
+
     <!-- ===== PROJECTS ===== -->
     <section id="projects">
+        <div class="section-number">04</div>
         <div class="section-label reveal">Projects</div>
         <h2 class="section-title reveal">Things I've built.</h2>
         <div class="projects-grid">
@@ -1264,8 +1693,14 @@
         </div>
     </section>
 
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+    </div>
+
     <!-- ===== SKILLS ===== -->
     <section id="skills">
+        <div class="section-number">05</div>
         <div class="section-label reveal">Skills</div>
         <h2 class="section-title reveal">My toolkit.</h2>
         <div class="skills-container">
@@ -1356,150 +1791,182 @@
         </div>
     </section>
 
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+    </div>
+
     <!-- ===== ACHIEVEMENTS & CODING ===== -->
     <section id="achievements">
+        <div class="section-number">06</div>
         <div class="section-label reveal">Achievements</div>
         <h2 class="section-title reveal">Competitive edge.</h2>
-        <div class="achievements-grid">
-            <div class="achievement-card reveal">
-                <div class="achievement-icon bg-orange"><i class="fas fa-trophy"></i></div>
-                <div>
-                    <h4>2x Hackathon Champion</h4>
-                    <p>Won 1st Place in both Sellathon (2024) and Designathon (2025) at E-Summit IIIT Nagpur</p>
+        <div class="achievements-section">
+            <div class="achievements-left">
+                <div class="achievement-large reveal">
+                    <div class="icon bg-orange"><i class="fas fa-trophy"></i></div>
+                    <div>
+                        <h4>2x Hackathon Champion</h4>
+                        <p>Won 1st Place in both Sellathon (2024) and Designathon (2025) at E-Summit IIIT Nagpur</p>
+                    </div>
+                </div>
+                <div class="achievement-large reveal reveal-delay-1">
+                    <div class="icon bg-accent"><i class="fas fa-ranking-star"></i></div>
+                    <div>
+                        <h4>Top 2% Globally — Codeforces</h4>
+                        <p>Rank 844 out of 44,000+ participants. Specialist title (max 1489).</p>
+                    </div>
                 </div>
             </div>
-            <div class="achievement-card reveal reveal-delay-1">
-                <div class="achievement-icon bg-accent"><i class="fas fa-ranking-star"></i></div>
-                <div>
-                    <h4>Top 2% Globally — Codeforces</h4>
-                    <p>Rank 844 out of 44,000+ participants in Codeforces Round 1032. Specialist title (max 1489).</p>
+            <div class="achievements-right">
+                <div class="achievement-small reveal">
+                    <div class="icon bg-green"><i class="fas fa-star"></i></div>
+                    <div>
+                        <h5>3-Star CodeChef (1648)</h5>
+                        <p>Global Rank 93 · Consistent performer</p>
+                    </div>
                 </div>
-            </div>
-            <div class="achievement-card reveal reveal-delay-2">
-                <div class="achievement-icon bg-green"><i class="fas fa-star"></i></div>
-                <div>
-                    <h4>3-Star CodeChef (1648)</h4>
-                    <p>Global Rank 93 out of 2,300+ in CodeChef Starter 189. Consistent top performer.</p>
+                <div class="achievement-small reveal reveal-delay-1">
+                    <div class="icon bg-cyan"><i class="fas fa-fire"></i></div>
+                    <div>
+                        <h5>300+ DSA Problems</h5>
+                        <p>125+ day streak · Deep foundation</p>
+                    </div>
                 </div>
-            </div>
-            <div class="achievement-card reveal reveal-delay-3">
-                <div class="achievement-icon bg-cyan"><i class="fas fa-fire"></i></div>
-                <div>
-                    <h4>300+ DSA Problems</h4>
-                    <p>Solved across LeetCode & GeeksforGeeks with a 125+ day streak. Deep algorithmic foundation.</p>
-                </div>
-            </div>
-            <div class="achievement-card reveal">
-                <div class="achievement-icon bg-pink"><i class="fas fa-award"></i></div>
-                <div>
-                    <h4>Government Merit Scholarship</h4>
-                    <p>Pratibhashali Vidyarthi Protsahan Yojana — ₹25,000 from Govt. of Madhya Pradesh for academic excellence</p>
+                <div class="achievement-small reveal reveal-delay-2">
+                    <div class="icon bg-pink"><i class="fas fa-award"></i></div>
+                    <div>
+                        <h5>Government Merit Scholarship</h5>
+                        <p>₹25,000 · Academic excellence</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Coding Profiles -->
-        <div class="profiles-grid">
-            <a href="https://www.codechef.com/users/gaze_rain_47" target="_blank" class="profile-card reveal">
-                <div class="profile-card-header">
-                    <span class="platform">CodeChef</span>
-                    <span class="rating" style="color: var(--orange);">★★★ 1648</span>
-                </div>
-                <span class="detail">Global Rank 93 · Starter 189</span>
-                <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
-            </a>
-            <a href="https://codeforces.com/profile/Talwar-baaz-fhd" target="_blank" class="profile-card reveal reveal-delay-1">
-                <div class="profile-card-header">
-                    <span class="platform">Codeforces</span>
-                    <span class="rating" style="color: var(--cyan);">Specialist · 1489</span>
-                </div>
-                <span class="detail">Rank 844 · Top 2% Globally</span>
-                <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
-            </a>
-            <a href="https://leetcode.com/u/fhd_got_adhd_303/" target="_blank" class="profile-card reveal reveal-delay-2">
-                <div class="profile-card-header">
-                    <span class="platform">LeetCode</span>
-                    <span class="rating" style="color: var(--green);">300+ Solved</span>
-                </div>
-                <span class="detail">125+ Day Streak · Active Solver</span>
-                <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
-            </a>
-            <a href="https://www.geeksforgeeks.org/user/fahadahmedgud2pg/" target="_blank" class="profile-card reveal reveal-delay-3">
-                <div class="profile-card-header">
-                    <span class="platform">GeeksforGeeks</span>
-                    <span class="rating" style="color: var(--accent-light);">Active</span>
-                </div>
-                <span class="detail">DSA Practice & Problem Solving</span>
-                <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
-            </a>
-            <a href="https://codolio.com/profile/FahadAhmed" target="_blank" class="profile-card reveal">
-                <div class="profile-card-header">
-                    <span class="platform">Codolio</span>
-                    <span class="rating" style="color: var(--pink);">Profile</span>
-                </div>
-                <span class="detail">Unified Coding Profile</span>
-                <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
-            </a>
+        <!-- Coding Profiles - Horizontal Strip -->
+        <div style="margin-top: 60px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 24px; color: var(--text-primary);">Coding Profiles</h3>
+            <div class="profiles-strip">
+                <a href="https://www.codechef.com/users/gaze_rain_47" target="_blank" class="profile-card reveal">
+                    <div class="profile-card-header">
+                        <span class="platform">CodeChef</span>
+                        <span class="rating" style="color: var(--orange);">★★★ 1648</span>
+                    </div>
+                    <span class="detail">Global Rank 93 · Starter 189</span>
+                    <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
+                </a>
+                <a href="https://codeforces.com/profile/Talwar-baaz-fhd" target="_blank" class="profile-card reveal reveal-delay-1">
+                    <div class="profile-card-header">
+                        <span class="platform">Codeforces</span>
+                        <span class="rating" style="color: var(--cyan);">Specialist · 1489</span>
+                    </div>
+                    <span class="detail">Rank 844 · Top 2% Globally</span>
+                    <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
+                </a>
+                <a href="https://leetcode.com/u/fhd_got_adhd_303/" target="_blank" class="profile-card reveal reveal-delay-2">
+                    <div class="profile-card-header">
+                        <span class="platform">LeetCode</span>
+                        <span class="rating" style="color: var(--green);">300+ Solved</span>
+                    </div>
+                    <span class="detail">125+ Day Streak · Active</span>
+                    <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
+                </a>
+                <a href="https://www.geeksforgeeks.org/user/fahadahmedgud2pg/" target="_blank" class="profile-card reveal reveal-delay-3">
+                    <div class="profile-card-header">
+                        <span class="platform">GeeksforGeeks</span>
+                        <span class="rating" style="color: var(--accent-light);">Active</span>
+                    </div>
+                    <span class="detail">DSA Practice</span>
+                    <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
+                </a>
+                <a href="https://codolio.com/profile/FahadAhmed" target="_blank" class="profile-card reveal">
+                    <div class="profile-card-header">
+                        <span class="platform">Codolio</span>
+                        <span class="rating" style="color: var(--pink);">Profile</span>
+                    </div>
+                    <span class="detail">Unified Coding Profile</span>
+                    <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
+                </a>
+            </div>
         </div>
     </section>
 
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+    </div>
+
     <!-- ===== LEADERSHIP ===== -->
     <section id="leadership">
+        <div class="section-number">07</div>
         <div class="section-label reveal">Leadership</div>
         <h2 class="section-title reveal">Beyond the code.</h2>
+
+        <!-- Featured Card -->
+        <div class="leadership-featured reveal">
+            <div class="role">Head of TantraFiesta</div>
+            <div class="org">IIIT Nagpur — Annual Technical Fest</div>
+            <div class="period">Aug 2025 — Nov 2025</div>
+            <ul>
+                <li>Directed a 150+ member team as CEO of IIIT Nagpur's flagship technical festival</li>
+                <li>Organized 29+ events and 10 high-impact hackathons across Web3, Data Science, and Quantum Computing</li>
+                <li>Secured 25+ corporate sponsorships and drove a record footfall of 2,500+ attendees (40% increase)</li>
+            </ul>
+        </div>
+
+        <!-- Other Leadership Roles -->
         <div class="leadership-grid">
-            <div class="leadership-card leadership-highlight reveal">
-                <div class="role">Head of TantraFiesta</div>
-                <div class="org">IIIT Nagpur — Annual Technical Fest</div>
-                <div class="period">Aug 2025 — Nov 2025</div>
-                <ul>
-                    <li>Directed a 150+ member team as CEO of IIIT Nagpur's flagship technical festival</li>
-                    <li>Organized 29+ events and 10 high-impact hackathons across Web3, Data Science, and Quantum Computing</li>
-                    <li>Secured 25+ corporate sponsorships and drove a record footfall of 2,500+ attendees (40% increase)</li>
-                </ul>
-            </div>
             <div class="leadership-card reveal reveal-delay-1">
                 <div class="role">Co-Head, Probe Club</div>
-                <div class="org">Media & Photography — IIIT Nagpur</div>
+                <div class="org">Media & Photography</div>
                 <div class="period">Aug 2024 — May 2025</div>
                 <ul>
-                    <li>Led 40+ member media and photography team</li>
-                    <li>Managed strategic equipment procurement and member training</li>
-                    <li>Executed institute-wide campaigns for visibility and engagement</li>
+                    <li>Led 40+ member media team</li>
+                    <li>Strategic equipment procurement</li>
+                    <li>Institute-wide campaigns</li>
                 </ul>
             </div>
             <div class="leadership-card reveal reveal-delay-2">
                 <div class="role">Corporate Relations Lead</div>
-                <div class="org">D-Taraxia Club — IIIT Nagpur</div>
+                <div class="org">D-Taraxia Club</div>
                 <div class="period">Oct 2023 — May 2024</div>
                 <ul>
-                    <li>Sponsor acquisition and corporate partnership development</li>
-                    <li>Built relationships with enterprise clients</li>
+                    <li>Sponsor acquisition</li>
+                    <li>Enterprise partnerships</li>
+                    <li>Business development</li>
+                </ul>
+            </div>
+            <div class="leadership-card reveal reveal-delay-3">
+                <div class="role">Content & Anchoring Lead</div>
+                <div class="org">Orator Club</div>
+                <div class="period">Aug 2024 — Apr 2025</div>
+                <ul>
+                    <li>Event hosting & coordination</li>
+                    <li>Speaking workshops</li>
+                    <li>Student development</li>
                 </ul>
             </div>
             <div class="leadership-card reveal reveal-delay-1">
-                <div class="role">Content & Anchoring Lead</div>
-                <div class="org">Orator Club — IIIT Nagpur</div>
-                <div class="period">Aug 2024 — Apr 2025</div>
-                <ul>
-                    <li>Event hosting and coordination for public speaking initiatives</li>
-                    <li>Promoted student development through speaking workshops</li>
-                </ul>
-            </div>
-            <div class="leadership-card reveal reveal-delay-2">
                 <div class="role">Social Media Manager</div>
-                <div class="org">Crescendo — Music Club IIIT Nagpur</div>
+                <div class="org">Crescendo — Music Club</div>
                 <div class="period">Oct 2023 — May 2024</div>
                 <ul>
-                    <li>Developed content strategy for audience engagement</li>
-                    <li>Built and managed community engagement initiatives</li>
+                    <li>Content strategy</li>
+                    <li>Audience engagement</li>
+                    <li>Community building</li>
                 </ul>
             </div>
         </div>
     </section>
 
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+    </div>
+
     <!-- ===== CERTIFICATIONS ===== -->
     <section id="certifications">
+        <div class="section-number">08</div>
         <div class="section-label reveal">Certifications</div>
         <h2 class="section-title reveal">Credentials.</h2>
         <div class="certs-grid">
@@ -1522,14 +1989,20 @@
         </div>
     </section>
 
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+    </div>
+
     <!-- ===== CONTACT ===== -->
     <section id="contact">
+        <div class="section-number">09</div>
         <div class="section-label reveal" style="justify-content: center;">Contact</div>
         <h2 class="contact-heading reveal">Let's build something<br><span class="gradient">together.</span></h2>
         <p class="contact-sub reveal">I'm actively looking for internship opportunities in Software Development, Data Science, and AI. If you think I'd be a good fit — let's talk.</p>
         <div class="contact-links reveal">
-            <a href="mailto:fahadahmed982004@gmail.com" class="contact-link">
-                <i class="fas fa-envelope"></i> fahadahmed982004@gmail.com
+            <a href="mailto:fahadahmedgulamulrehman@gmail.com" class="contact-link">
+                <i class="fas fa-envelope"></i> fahadahmedgulamulrehman@gmail.com
             </a>
             <a href="tel:+919977352408" class="contact-link">
                 <i class="fas fa-phone"></i> +91 9977352408
@@ -1554,12 +2027,22 @@
     </footer>
 
     <script>
-        // ===== LOADER =====
+        // ===== LOADER WITH PERCENTAGE =====
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }, 2400);
+            const percentElement = document.getElementById('loaderPercent');
+            let currentPercent = 0;
+            const interval = setInterval(() => {
+                currentPercent += Math.random() * 30;
+                if (currentPercent > 100) currentPercent = 100;
+                percentElement.textContent = Math.floor(currentPercent) + '%';
+                if (currentPercent >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        document.getElementById('loader').classList.add('hidden');
+                        document.body.style.overflow = 'auto';
+                    }, 300);
+                }
+            }, 200);
         });
         document.body.style.overflow = 'hidden';
 
