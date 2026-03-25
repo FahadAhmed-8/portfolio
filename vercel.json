@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "public": false,
-  "buildCommand": "echo 'Static site - no build needed'",
-  "outputDirectory": "."
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "public": false
 }
