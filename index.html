@@ -469,6 +469,11 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 30px var(--accent-glow);
         }
+        .btn-primary:active {
+            transform: translateY(1px) scale(0.97);
+            box-shadow: 0 2px 8px var(--accent-glow);
+            background: #4f46e5;
+        }
         .btn-secondary {
             background: var(--bg-tertiary);
             color: var(--text-primary);
@@ -478,6 +483,11 @@
             background: var(--bg-card-hover);
             border-color: var(--border-hover);
             transform: translateY(-2px);
+        }
+        .btn-secondary:active {
+            transform: translateY(1px) scale(0.97);
+            background: var(--bg-secondary);
+            border-color: var(--accent);
         }
         .hero-stats {
             display: flex;
@@ -1220,48 +1230,54 @@
         /* ===== CONTACT ===== */
         #contact {
             text-align: center;
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 40px 60px;
         }
         .contact-heading {
             font-family: var(--font-heading);
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
             font-weight: 800;
             letter-spacing: -2px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
         .contact-sub {
             color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
+            font-size: 1rem;
+            max-width: 480px;
+            margin: 0 auto 28px;
+            line-height: 1.6;
         }
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 48px;
+            margin-bottom: 28px;
         }
         .contact-link {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px 24px;
+            gap: 8px;
+            padding: 10px 18px;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
             color: var(--text-primary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             transition: all var(--transition);
         }
         .contact-link:hover {
             border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
         }
-        .contact-link i { color: var(--accent-light); font-size: 1.1rem; }
+        .contact-link i { color: var(--accent-light); font-size: 1rem; }
         .contact-social {
             display: flex;
             justify-content: center;
@@ -1288,7 +1304,7 @@
 
         /* ===== FOOTER ===== */
         footer {
-            padding: 40px;
+            padding: 24px 40px;
             text-align: center;
             border-top: 1px solid var(--border);
         }
@@ -1495,13 +1511,13 @@
                     <a href="#contact" class="btn btn-secondary">
                         <i class="fas fa-paper-plane"></i> Get In Touch
                     </a>
-                    <a href="./Fahad_Ahmed_Resume.pdf" download class="btn btn-secondary">
-                        <i class="fas fa-file-download"></i> Resume
+                    <a href="https://drive.google.com/file/d/1aNGDsYDiSae9kLmaMQL43LgjvgnbUSmO/view?usp=drive_link" target="_blank" class="btn btn-secondary">
+                        <i class="fas fa-file-alt"></i> Resume
                     </a>
                 </div>
                 <div class="hero-stats reveal reveal-delay-4">
                     <div class="hero-stat">
-                        <div class="hero-stat-value" data-count="300">0+</div>
+                        <div class="hero-stat-value" data-count="450">0+</div>
                         <div class="hero-stat-label">DSA Problems</div>
                     </div>
                     <div class="hero-stat">
@@ -1601,10 +1617,14 @@
                 <div class="timeline-date">Aug 2025 — Sep 2025</div>
                 <h3>Software Development Extern</h3>
                 <div class="company">Algo University · Remote</div>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 16px;">Built <strong style="color: var(--text-primary);">CodeClash</strong> — a full-stack competitive programming online judge platform with AI-powered mentoring, real-time contests, and Docker-sandboxed code execution. <a href="https://code-clash-seven.vercel.app/" target="_blank" style="color: var(--accent-light); text-decoration: none; font-weight: 600;">View Live &rarr;</a></p>
                 <ul>
-                    <li>Spearheaded development of a full-stack competitive coding platform using the MERN stack with an integrated multi-language compiler</li>
-                    <li>Engineered a robust user profile system to track progress and personalize learning experience</li>
-                    <li>Implemented AI models for intelligent code suggestions and error analysis, measurably improving users' code quality and accelerating learning</li>
+                    <li>Architected a three-tier decoupled microservices system: React SPA on Vercel, Express API on Render, and Docker-isolated compiler service on AWS EC2 supporting C++, Python, and Java</li>
+                    <li>Engineered a Docker-sandboxed code execution engine with 2-second timeouts, multi-stage builds, and non-root containers for secure remote compilation against hidden test cases</li>
+                    <li>Integrated AI-powered code mentoring using Groq SDK (LLaMA 3.3 70B) for real-time hints and Google Gemini for automated code review and debugging on wrong submissions</li>
+                    <li>Built a RESTful API with 23 endpoints across 5 route modules, JWT authentication, role-based access control, and an admin dashboard with CRUD for 25+ curated algorithmic problems</li>
+                    <li>Implemented real-time contest system with timed rounds, auto-computed status, live leaderboards with 15-second refresh, room codes, and multi-problem scoring</li>
+                    <li>Developed a responsive React SPA with 13 routes, Monaco Editor integration, user profiles with performance analytics, global leaderboard with podium rankings, and submission history tracking</li>
                 </ul>
             </div>
         </div>
@@ -1836,7 +1856,7 @@
                 <div class="achievement-small reveal reveal-delay-1">
                     <div class="icon bg-cyan"><i class="fas fa-fire"></i></div>
                     <div>
-                        <h5>300+ DSA Problems</h5>
+                        <h5>450+ DSA Problems</h5>
                         <p>125+ day streak · Deep foundation</p>
                     </div>
                 </div>
@@ -1873,7 +1893,7 @@
                 <a href="https://leetcode.com/u/fhd_got_adhd_303/" target="_blank" class="profile-card reveal reveal-delay-2">
                     <div class="profile-card-header">
                         <span class="platform">LeetCode</span>
-                        <span class="rating" style="color: var(--green);">300+ Solved</span>
+                        <span class="rating" style="color: var(--green);">450+ Solved</span>
                     </div>
                     <span class="detail">125+ Day Streak · Active</span>
                     <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
