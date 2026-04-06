@@ -933,9 +933,11 @@
             color: var(--text-primary);
         }
         .marquee-wrapper {
-            overflow: hidden;
+            overflow: clip visible;
+            overflow-x: clip;
             position: relative;
             width: 100%;
+            padding: 8px 0;
             mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
             -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
         }
@@ -1108,73 +1110,74 @@
             font-size: 1.2rem;
         }
 
-        .leadership-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .leadership-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 28px;
-            transition: all var(--transition);
-            position: relative;
-            padding-left: 48px;
-        }
-
-        .leadership-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, var(--accent), transparent);
-            border-radius: 4px 0 0 4px;
-        }
-
-        .leadership-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-        }
-        .leadership-card .role {
+        /* Leadership other roles - marquee carousel */
+        .leadership-marquee-section { margin-top: 32px; }
+        .leadership-marquee-section h3 {
             font-family: var(--font-heading);
             font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        .leadership-marquee .marquee-track {
+            animation: marquee 30s linear infinite;
+        }
+        .lead-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            min-width: 300px;
+            flex-shrink: 0;
+            transition: all var(--transition);
+            position: relative;
+            padding-left: 40px;
+        }
+        .lead-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent), transparent);
+            border-radius: 3px 0 0 3px;
+        }
+        .lead-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        }
+        .lead-card .role {
+            font-family: var(--font-heading);
+            font-size: 1rem;
             font-weight: 700;
             margin-bottom: 4px;
+            color: var(--text-primary);
         }
-        .leadership-card .org {
+        .lead-card .org {
             color: var(--accent-light);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
-        .leadership-card .period {
+        .lead-card .period {
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
-        .leadership-card ul {
-            list-style: none;
+        .lead-card .highlights {
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            flex-wrap: wrap;
+            gap: 6px;
         }
-        .leadership-card li {
+        .lead-card .highlights span {
+            padding: 3px 10px;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            font-size: 0.7rem;
             color: var(--text-secondary);
-            font-size: 0.85rem;
-            padding-left: 16px;
-            position: relative;
+            font-family: var(--font-mono);
         }
-        .leadership-card li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--accent-light);
-        }
+        /* (old leadership card li removed - now using tag chips) */
 
         /* ===== CERTIFICATIONS ===== */
         .certs-grid {
@@ -1979,47 +1982,78 @@
             </ul>
         </div>
 
-        <!-- Other Leadership Roles -->
-        <div class="leadership-grid">
-            <div class="leadership-card reveal reveal-delay-1">
-                <div class="role">Co-Head, Probe Club</div>
-                <div class="org">Media & Photography</div>
-                <div class="period">Aug 2024 — May 2025</div>
-                <ul>
-                    <li>Led 40+ member media team</li>
-                    <li>Strategic equipment procurement</li>
-                    <li>Institute-wide campaigns</li>
-                </ul>
-            </div>
-            <div class="leadership-card reveal reveal-delay-2">
-                <div class="role">Corporate Relations Lead</div>
-                <div class="org">D-Taraxia Club</div>
-                <div class="period">Oct 2023 — May 2024</div>
-                <ul>
-                    <li>Sponsor acquisition</li>
-                    <li>Enterprise partnerships</li>
-                    <li>Business development</li>
-                </ul>
-            </div>
-            <div class="leadership-card reveal reveal-delay-3">
-                <div class="role">Content & Anchoring Lead</div>
-                <div class="org">Orator Club</div>
-                <div class="period">Aug 2024 — Apr 2025</div>
-                <ul>
-                    <li>Event hosting & coordination</li>
-                    <li>Speaking workshops</li>
-                    <li>Student development</li>
-                </ul>
-            </div>
-            <div class="leadership-card reveal reveal-delay-1">
-                <div class="role">Social Media Manager</div>
-                <div class="org">Crescendo — Music Club</div>
-                <div class="period">Oct 2023 — May 2024</div>
-                <ul>
-                    <li>Content strategy</li>
-                    <li>Audience engagement</li>
-                    <li>Community building</li>
-                </ul>
+        <!-- Other Leadership Roles - Marquee Carousel -->
+        <div class="leadership-marquee-section reveal">
+            <h3>Other Roles</h3>
+            <div class="marquee-wrapper leadership-marquee">
+                <div class="marquee-track">
+                    <!-- Set 1 -->
+                    <div class="lead-card">
+                        <div class="role">Co-Head, Probe Club</div>
+                        <div class="org">Media & Photography — IIIT Nagpur</div>
+                        <div class="period">Aug 2024 — May 2025</div>
+                        <div class="highlights">
+                            <span>40+ Members</span><span>Media Strategy</span><span>Event Coverage</span>
+                        </div>
+                    </div>
+                    <div class="lead-card">
+                        <div class="role">Corporate Relations Lead</div>
+                        <div class="org">D-Taraxia Club — IIIT Nagpur</div>
+                        <div class="period">Oct 2023 — May 2024</div>
+                        <div class="highlights">
+                            <span>Sponsorships</span><span>Enterprise Partnerships</span><span>Biz Dev</span>
+                        </div>
+                    </div>
+                    <div class="lead-card">
+                        <div class="role">Content & Anchoring Lead</div>
+                        <div class="org">Orator Club — IIIT Nagpur</div>
+                        <div class="period">Aug 2024 — Apr 2025</div>
+                        <div class="highlights">
+                            <span>Event Hosting</span><span>Public Speaking</span><span>Workshops</span>
+                        </div>
+                    </div>
+                    <div class="lead-card">
+                        <div class="role">Social Media Manager</div>
+                        <div class="org">Crescendo — Music Club</div>
+                        <div class="period">Oct 2023 — May 2024</div>
+                        <div class="highlights">
+                            <span>Content Strategy</span><span>Engagement</span><span>Community</span>
+                        </div>
+                    </div>
+                    <!-- Set 2 (duplicate for seamless loop) -->
+                    <div class="lead-card">
+                        <div class="role">Co-Head, Probe Club</div>
+                        <div class="org">Media & Photography — IIIT Nagpur</div>
+                        <div class="period">Aug 2024 — May 2025</div>
+                        <div class="highlights">
+                            <span>40+ Members</span><span>Media Strategy</span><span>Event Coverage</span>
+                        </div>
+                    </div>
+                    <div class="lead-card">
+                        <div class="role">Corporate Relations Lead</div>
+                        <div class="org">D-Taraxia Club — IIIT Nagpur</div>
+                        <div class="period">Oct 2023 — May 2024</div>
+                        <div class="highlights">
+                            <span>Sponsorships</span><span>Enterprise Partnerships</span><span>Biz Dev</span>
+                        </div>
+                    </div>
+                    <div class="lead-card">
+                        <div class="role">Content & Anchoring Lead</div>
+                        <div class="org">Orator Club — IIIT Nagpur</div>
+                        <div class="period">Aug 2024 — Apr 2025</div>
+                        <div class="highlights">
+                            <span>Event Hosting</span><span>Public Speaking</span><span>Workshops</span>
+                        </div>
+                    </div>
+                    <div class="lead-card">
+                        <div class="role">Social Media Manager</div>
+                        <div class="org">Crescendo — Music Club</div>
+                        <div class="period">Oct 2023 — May 2024</div>
+                        <div class="highlights">
+                            <span>Content Strategy</span><span>Engagement</span><span>Community</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
