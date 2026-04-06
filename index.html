@@ -175,8 +175,12 @@
         /* ===== NAVIGATION ===== */
         nav {
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
+            width: 100%;
+            max-width: 1280px;
             padding: 0 40px;
             height: 72px;
             display: flex;
@@ -185,6 +189,9 @@
             background: rgba(10, 10, 15, 0.8);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            border-radius: 0 0 16px 16px;
             transition: all var(--transition);
         }
         nav.scrolled {
