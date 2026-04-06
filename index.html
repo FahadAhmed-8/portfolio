@@ -880,154 +880,151 @@
         }
 
         /* ===== ACHIEVEMENTS ===== */
-        .achievements-section {
+        /* ===== ACHIEVEMENTS - UNIFORM GRID ===== */
+        .achievements-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        .achievements-left {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .achievement-large {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            display: flex;
-            gap: 24px;
-            align-items: flex-start;
-            transition: all var(--transition);
-        }
-
-        .achievement-large:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-        }
-
-        .achievement-large .icon {
-            width: 60px;
-            height: 60px;
-            min-width: 60px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-        }
-
-        .achievement-large h4 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-
-        .achievement-large p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .achievements-right {
-            display: flex;
-            flex-direction: column;
+            grid-template-columns: repeat(3, 1fr);
             gap: 16px;
         }
-
-        .achievement-small {
+        .achievements-grid .ach-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 20px;
+            padding: 24px;
             display: flex;
             gap: 16px;
             align-items: center;
             transition: all var(--transition);
         }
-
-        .achievement-small:hover {
+        .achievements-grid .ach-card:hover {
             border-color: var(--accent);
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
         }
+        .achievements-grid .ach-card .ach-icon {
+            width: 48px; height: 48px; min-width: 48px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+        }
+        .achievements-grid .ach-card h4 {
+            font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 3px;
+        }
+        .achievements-grid .ach-card p {
+            color: var(--text-secondary); font-size: 0.8rem; line-height: 1.5;
+        }
+        .achievements-grid .ach-card.featured {
+            grid-column: span 2;
+            background: linear-gradient(135deg, var(--bg-card), rgba(99,102,241,0.06));
+            border-color: rgba(99,102,241,0.15);
+        }
+        .achievements-grid .ach-card.featured .ach-icon {
+            width: 56px; height: 56px; min-width: 56px; font-size: 1.4rem;
+        }
+        .achievements-grid .ach-card.featured h4 { font-size: 1.1rem; }
+        .achievements-grid .ach-card.featured p { font-size: 0.85rem; }
 
-        .achievement-small .icon {
-            width: 40px;
-            height: 40px;
-            min-width: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* ===== CODING PROFILES - MARQUEE CAROUSEL ===== */
+        .profiles-section { margin-top: 40px; }
+        .profiles-section h3 {
+            font-family: var(--font-heading);
             font-size: 1.1rem;
-        }
-
-        .achievement-small h5 {
-            font-size: 0.95rem;
-            font-weight: 700;
+            margin-bottom: 20px;
             color: var(--text-primary);
-            margin-bottom: 2px;
         }
-
-        .achievement-small p {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            line-height: 1.4;
+        .marquee-wrapper {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
         }
-
-        /* ===== CODING PROFILES - HORIZONTAL STRIP ===== */
-        .profiles-strip {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-top: 40px;
+        .marquee-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            animation: marquee 25s linear infinite;
         }
-
+        .marquee-wrapper:hover .marquee-track {
+            animation-play-state: paused;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
         .profile-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 20px;
+            padding: 20px 24px;
             text-decoration: none;
             transition: all var(--transition);
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+            align-items: center;
+            gap: 20px;
+            min-width: 280px;
+            flex-shrink: 0;
         }
         .profile-card:hover {
             border-color: var(--accent);
-            transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
         }
-        .profile-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .profile-info {
+            flex: 1;
         }
         .profile-card .platform {
             font-weight: 700;
             font-size: 0.95rem;
             color: var(--text-primary);
+            display: block;
         }
         .profile-card .rating {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
+            display: block;
+            margin-top: 2px;
         }
         .profile-card .detail {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-        .profile-card .external-icon {
-            color: var(--text-muted);
             font-size: 0.75rem;
-            transition: all var(--transition);
+            color: var(--text-secondary);
+            display: block;
+            margin-top: 4px;
         }
-        .profile-card:hover .external-icon { color: var(--accent-light); }
+        .profile-btn {
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition);
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        .profile-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent-light);
+            background: var(--accent-dim);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+        .profile-btn:hover::before { left: 100%; }
+        .profile-btn:active {
+            transform: translateY(1px) scale(0.95);
+            box-shadow: none;
+        }
 
         /* ===== LEADERSHIP ===== */
         .leadership-featured {
@@ -1383,8 +1380,8 @@
             .hero-stats { gap: 24px; }
             .hero-stat::after { right: -12px; }
             .projects-grid { grid-template-columns: 1fr; }
-            .achievements-section { grid-template-columns: 1fr; gap: 40px; }
-            .profiles-strip { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+            .achievements-grid { grid-template-columns: 1fr 1fr; }
+            .achievements-grid .ach-card.featured { grid-column: span 1; }
         }
 
         @media (max-width: 600px) {
@@ -1394,7 +1391,8 @@
             .hero-actions { flex-direction: column; }
             .btn { justify-content: center; }
             .about-details { grid-template-columns: 1fr; }
-            .profiles-strip { grid-template-columns: 1fr; }
+            .achievements-grid { grid-template-columns: 1fr; }
+            .achievements-grid .ach-card.featured { grid-column: span 1; }
             .contact-links { flex-direction: column; align-items: center; }
             .leadership-featured {
                 padding: 32px;
@@ -1828,92 +1826,132 @@
         <div class="section-number">06</div>
         <div class="section-label reveal">Achievements</div>
         <h2 class="section-title reveal">Competitive edge.</h2>
-        <div class="achievements-section">
-            <div class="achievements-left">
-                <div class="achievement-large reveal">
-                    <div class="icon bg-orange"><i class="fas fa-trophy"></i></div>
-                    <div>
-                        <h4>2x Hackathon Champion</h4>
-                        <p>Won 1st Place in both Sellathon (2024) and Designathon (2025) at E-Summit IIIT Nagpur</p>
-                    </div>
-                </div>
-                <div class="achievement-large reveal reveal-delay-1">
-                    <div class="icon bg-accent"><i class="fas fa-ranking-star"></i></div>
-                    <div>
-                        <h4>Top 2% Globally — Codeforces</h4>
-                        <p>Rank 844 out of 44,000+ participants. Specialist title (max 1489).</p>
-                    </div>
+        <div class="achievements-grid">
+            <div class="ach-card featured reveal">
+                <div class="ach-icon bg-orange"><i class="fas fa-trophy"></i></div>
+                <div>
+                    <h4>2x Hackathon Champion</h4>
+                    <p>1st Place in Sellathon (2024) & Designathon (2025) at E-Summit IIIT Nagpur</p>
                 </div>
             </div>
-            <div class="achievements-right">
-                <div class="achievement-small reveal">
-                    <div class="icon bg-green"><i class="fas fa-star"></i></div>
-                    <div>
-                        <h5>3-Star CodeChef (1648)</h5>
-                        <p>Global Rank 93 · Consistent performer</p>
-                    </div>
+            <div class="ach-card reveal reveal-delay-1">
+                <div class="ach-icon bg-green"><i class="fas fa-star"></i></div>
+                <div>
+                    <h4>3-Star CodeChef (1648)</h4>
+                    <p>Global Rank 93 · Consistent performer</p>
                 </div>
-                <div class="achievement-small reveal reveal-delay-1">
-                    <div class="icon bg-cyan"><i class="fas fa-fire"></i></div>
-                    <div>
-                        <h5>450+ DSA Problems</h5>
-                        <p>125+ day streak · Deep foundation</p>
-                    </div>
+            </div>
+            <div class="ach-card reveal reveal-delay-1">
+                <div class="ach-icon bg-accent"><i class="fas fa-ranking-star"></i></div>
+                <div>
+                    <h4>Top 2% Globally — Codeforces</h4>
+                    <p>Rank 844 / 44,000+ · Specialist (1489)</p>
                 </div>
-                <div class="achievement-small reveal reveal-delay-2">
-                    <div class="icon bg-pink"><i class="fas fa-award"></i></div>
-                    <div>
-                        <h5>Government Merit Scholarship</h5>
-                        <p>₹25,000 · Academic excellence</p>
-                    </div>
+            </div>
+            <div class="ach-card reveal reveal-delay-2">
+                <div class="ach-icon bg-cyan"><i class="fas fa-fire"></i></div>
+                <div>
+                    <h4>450+ DSA Problems</h4>
+                    <p>125+ day streak · Deep foundation</p>
+                </div>
+            </div>
+            <div class="ach-card reveal reveal-delay-2">
+                <div class="ach-icon bg-pink"><i class="fas fa-award"></i></div>
+                <div>
+                    <h4>Government Merit Scholarship</h4>
+                    <p>₹25,000 · Academic excellence award</p>
                 </div>
             </div>
         </div>
 
-        <!-- Coding Profiles - Horizontal Strip -->
-        <div style="margin-top: 60px;">
-            <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 24px; color: var(--text-primary);">Coding Profiles</h3>
-            <div class="profiles-strip">
-                <a href="https://www.codechef.com/users/gaze_rain_47" target="_blank" class="profile-card reveal">
-                    <div class="profile-card-header">
-                        <span class="platform">CodeChef</span>
-                        <span class="rating" style="color: var(--orange);">★★★ 1648</span>
+        <!-- Coding Profiles - Auto-Scrolling Marquee -->
+        <div class="profiles-section reveal">
+            <h3>Coding Profiles</h3>
+            <div class="marquee-wrapper">
+                <div class="marquee-track" id="marqueeTrack">
+                    <!-- Set 1 -->
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <span class="platform">CodeChef</span>
+                            <span class="rating" style="color: var(--orange);">★★★ 1648</span>
+                            <span class="detail">Global Rank 93 · Starter 189</span>
+                        </div>
+                        <a href="https://www.codechef.com/users/gaze_rain_47" target="_blank" class="profile-btn">View Profile</a>
                     </div>
-                    <span class="detail">Global Rank 93 · Starter 189</span>
-                    <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
-                </a>
-                <a href="https://codeforces.com/profile/Talwar-baaz-fhd" target="_blank" class="profile-card reveal reveal-delay-1">
-                    <div class="profile-card-header">
-                        <span class="platform">Codeforces</span>
-                        <span class="rating" style="color: var(--cyan);">Specialist · 1489</span>
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <span class="platform">Codeforces</span>
+                            <span class="rating" style="color: var(--cyan);">Specialist · 1489</span>
+                            <span class="detail">Rank 844 · Top 2% Globally</span>
+                        </div>
+                        <a href="https://codeforces.com/profile/Talwar-baaz-fhd" target="_blank" class="profile-btn">View Profile</a>
                     </div>
-                    <span class="detail">Rank 844 · Top 2% Globally</span>
-                    <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
-                </a>
-                <a href="https://leetcode.com/u/fhd_got_adhd_303/" target="_blank" class="profile-card reveal reveal-delay-2">
-                    <div class="profile-card-header">
-                        <span class="platform">LeetCode</span>
-                        <span class="rating" style="color: var(--green);">450+ Solved</span>
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <span class="platform">LeetCode</span>
+                            <span class="rating" style="color: var(--green);">450+ Solved</span>
+                            <span class="detail">125+ Day Streak · Active</span>
+                        </div>
+                        <a href="https://leetcode.com/u/fhd_got_adhd_303/" target="_blank" class="profile-btn">View Profile</a>
                     </div>
-                    <span class="detail">125+ Day Streak · Active</span>
-                    <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
-                </a>
-                <a href="https://www.geeksforgeeks.org/user/fahadahmedgud2pg/" target="_blank" class="profile-card reveal reveal-delay-3">
-                    <div class="profile-card-header">
-                        <span class="platform">GeeksforGeeks</span>
-                        <span class="rating" style="color: var(--accent-light);">Active</span>
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <span class="platform">GeeksforGeeks</span>
+                            <span class="rating" style="color: var(--accent-light);">Active</span>
+                            <span class="detail">DSA Practice & Problem Solving</span>
+                        </div>
+                        <a href="https://www.geeksforgeeks.org/user/fahadahmedgud2pg/" target="_blank" class="profile-btn">View Profile</a>
                     </div>
-                    <span class="detail">DSA Practice</span>
-                    <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
-                </a>
-                <a href="https://codolio.com/profile/FahadAhmed" target="_blank" class="profile-card reveal">
-                    <div class="profile-card-header">
-                        <span class="platform">Codolio</span>
-                        <span class="rating" style="color: var(--pink);">Profile</span>
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <span class="platform">Codolio</span>
+                            <span class="rating" style="color: var(--pink);">Unified Profile</span>
+                            <span class="detail">All platforms in one place</span>
+                        </div>
+                        <a href="https://codolio.com/profile/FahadAhmed" target="_blank" class="profile-btn">View Profile</a>
                     </div>
-                    <span class="detail">Unified Coding Profile</span>
-                    <span class="external-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
-                </a>
+                    <!-- Set 2 (duplicate for seamless loop) -->
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <span class="platform">CodeChef</span>
+                            <span class="rating" style="color: var(--orange);">★★★ 1648</span>
+                            <span class="detail">Global Rank 93 · Starter 189</span>
+                        </div>
+                        <a href="https://www.codechef.com/users/gaze_rain_47" target="_blank" class="profile-btn">View Profile</a>
+                    </div>
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <span class="platform">Codeforces</span>
+                            <span class="rating" style="color: var(--cyan);">Specialist · 1489</span>
+                            <span class="detail">Rank 844 · Top 2% Globally</span>
+                        </div>
+                        <a href="https://codeforces.com/profile/Talwar-baaz-fhd" target="_blank" class="profile-btn">View Profile</a>
+                    </div>
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <span class="platform">LeetCode</span>
+                            <span class="rating" style="color: var(--green);">450+ Solved</span>
+                            <span class="detail">125+ Day Streak · Active</span>
+                        </div>
+                        <a href="https://leetcode.com/u/fhd_got_adhd_303/" target="_blank" class="profile-btn">View Profile</a>
+                    </div>
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <span class="platform">GeeksforGeeks</span>
+                            <span class="rating" style="color: var(--accent-light);">Active</span>
+                            <span class="detail">DSA Practice & Problem Solving</span>
+                        </div>
+                        <a href="https://www.geeksforgeeks.org/user/fahadahmedgud2pg/" target="_blank" class="profile-btn">View Profile</a>
+                    </div>
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <span class="platform">Codolio</span>
+                            <span class="rating" style="color: var(--pink);">Unified Profile</span>
+                            <span class="detail">All platforms in one place</span>
+                        </div>
+                        <a href="https://codolio.com/profile/FahadAhmed" target="_blank" class="profile-btn">View Profile</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
