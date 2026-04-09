@@ -764,25 +764,27 @@
             margin-top: 2px;
         }
 
-        /* Buttons — clear hierarchy */
+        /* Buttons — full-width stacked */
         .exp-buttons {
             display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 10px;
             position: relative;
             z-index: 1;
         }
         .exp-btn-primary {
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            padding: 11px 22px;
+            width: 100%;
+            padding: 13px 22px;
             background: var(--accent);
             color: #fff;
             border: none;
             border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.88rem;
+            font-weight: 700;
             font-family: var(--font-body);
             text-decoration: none;
             cursor: pointer;
@@ -796,16 +798,18 @@
         }
         .exp-btn-primary:active { transform: translateY(1px); box-shadow: none; }
         .exp-btn-ghost {
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            padding: 10px 22px;
+            width: 100%;
+            padding: 12px 22px;
             background: transparent;
             color: var(--text-secondary);
             border: 1px solid var(--border-hover);
             border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.88rem;
+            font-weight: 700;
             font-family: var(--font-body);
             text-decoration: none;
             cursor: pointer;
@@ -945,26 +949,37 @@
         .view-all-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            border: 1px solid var(--accent);
-            color: var(--accent-light);
-            border-radius: 100px;
+            gap: 10px;
+            padding: 15px 40px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
             text-decoration: none;
-            font-size: 0.82rem;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 800;
+            font-family: var(--font-heading);
+            letter-spacing: -0.01em;
             transition: all var(--transition);
+            box-shadow: 0 6px 28px rgba(99,102,241,0.45), 0 2px 8px rgba(0,0,0,0.25);
             position: relative;
             overflow: hidden;
         }
-        .view-all-btn:hover {
-            background: var(--accent);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px var(--accent-glow);
+        .view-all-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
+            pointer-events: none;
         }
-        .view-all-btn i { transition: transform var(--transition); }
-        .view-all-btn:hover i { transform: translateX(4px); }
+        .view-all-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(99,102,241,0.6), 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .view-all-btn:active { transform: translateY(0); box-shadow: 0 4px 14px rgba(99,102,241,0.35); }
+        .view-all-btn i { transition: transform var(--transition); font-size: 0.95rem; }
+        .view-all-btn:hover i { transform: translateX(5px); }
 
         /* ===== SKILLS REDESIGN ===== */
         .skills-filter {
@@ -1105,39 +1120,41 @@
         .achievements-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 22px;
+            gap: 14px;
+            margin-bottom: 24px;
         }
         .ach-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 16px;
+            border-radius: var(--radius-lg);
+            padding: 22px 20px;
             display: flex;
-            gap: 12px;
+            gap: 16px;
             align-items: center;
             transition: all var(--transition);
         }
         .ach-card:hover {
             border-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 22px rgba(0,0,0,0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 32px rgba(0,0,0,0.28);
+            background: var(--bg-card-hover);
         }
         .ach-card .ach-icon {
-            width: 40px; height: 40px; min-width: 40px;
-            border-radius: 10px;
+            width: 52px; height: 52px; min-width: 52px;
+            border-radius: 14px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1rem;
+            font-size: 1.3rem;
         }
-        .ach-card h4 { font-size: 0.82rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
-        .ach-card p { color: var(--text-secondary); font-size: 0.72rem; line-height: 1.4; }
+        .ach-card h4 { font-size: 0.96rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+        .ach-card p { color: var(--text-secondary); font-size: 0.8rem; line-height: 1.45; }
         .ach-card.featured {
             grid-column: span 2;
-            background: linear-gradient(135deg, var(--bg-card), rgba(99,102,241,0.06));
-            border-color: rgba(99,102,241,0.15);
+            background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(6,182,212,0.03));
+            border-color: rgba(99,102,241,0.2);
         }
-        .ach-card.featured .ach-icon { width: 44px; height: 44px; min-width: 44px; font-size: 1.1rem; }
-        .ach-card.featured h4 { font-size: 0.92rem; }
+        .ach-card.featured .ach-icon { width: 58px; height: 58px; min-width: 58px; font-size: 1.5rem; border-radius: 16px; }
+        .ach-card.featured h4 { font-size: 1.08rem; }
+        .ach-card.featured p { font-size: 0.84rem; }
 
         .profiles-section h3 {
             font-family: var(--font-heading);
@@ -1185,35 +1202,26 @@
         .profile-card .rating { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; display: block; margin-top: 1px; }
         .profile-card .detail { font-size: 0.66rem; color: var(--text-secondary); display: block; margin-top: 2px; }
         .profile-btn {
-            padding: 5px 11px;
-            border-radius: 6px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            font-size: 0.68rem;
-            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 8px;
+            background: var(--accent);
+            border: 1px solid var(--accent);
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: var(--font-body);
             text-decoration: none;
             transition: all var(--transition);
             white-space: nowrap;
-            position: relative;
-            overflow: hidden;
-        }
-        .profile-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent);
-            transition: left 0.5s ease;
+            box-shadow: 0 3px 10px rgba(99,102,241,0.35);
         }
         .profile-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent-light);
-            background: var(--accent-dim);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 14px var(--accent-glow);
+            background: var(--accent-light);
+            border-color: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(99,102,241,0.5);
         }
-        .profile-btn:hover::before { left: 100%; }
-        .profile-btn:active { transform: translateY(1px) scale(0.95); box-shadow: none; }
+        .profile-btn:active { transform: translateY(0); box-shadow: none; }
 
         /* ===== LEADERSHIP ===== */
         .leadership-featured {
@@ -1880,7 +1888,7 @@
                                 <div class="exp-company-sub">EdTech · Remote</div>
                             </div>
                         </div>
-                        <div class="exp-period-badge">Aug 2025 — Sep 2025</div>
+                        <div class="exp-period-badge">1 May 2025 — 31 Jul 2025</div>
                     </div>
 
                     <!-- Role -->
@@ -1931,7 +1939,7 @@
                         <a href="https://code-clash-seven.vercel.app/" target="_blank" class="exp-btn-primary">
                             <i class="fas fa-external-link-alt"></i> Live Website
                         </a>
-                        <a href="#" target="_blank" class="exp-btn-ghost">
+                        <a href="https://drive.google.com/file/d/1phfam616nx1uheiM0FwLC3VxW1ZNUUVp/view?usp=sharing" target="_blank" class="exp-btn-ghost">
                             <i class="fas fa-certificate"></i> Certificate
                         </a>
                     </div>
@@ -2020,8 +2028,8 @@
                     </div>
                 </div>
             </div>
-            <div class="projects-footer reveal">
-                <a href="projects.html" class="view-all-btn">View All Projects <i class="fas fa-arrow-right"></i></a>
+            <div class="projects-footer">
+                <a href="projects.html" class="view-all-btn"><i class="fas fa-th-large"></i> View All Projects <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
