@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+  <!-- Codeforces: three bar chart on black -->
+  <rect width="50" height="50" rx="10" fill="#1a1a1a"/>
+  <!-- Tall left bar - yellow/gold -->
+  <rect x="9" y="14" width="10" height="26" rx="2" fill="#F2C000"/>
+  <!-- Medium center bar - blue -->
+  <rect x="20" y="22" width="10" height="18" rx="2" fill="#4C7BD9"/>
+  <!-- Short right bar - dark red -->
+  <rect x="31" y="30" width="10" height="10" rx="2" fill="#8B1A1A"/>
+</svg>

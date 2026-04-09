@@ -121,6 +121,18 @@
 }
 .project-btn:hover::before { left: 100%; }
 .project-btn:active { transform: translateY(1px) scale(0.97); box-shadow: none; }
+/* Demo / video button variant */
+.project-btn-demo {
+    background: rgba(255, 0, 0, 0.12);
+    border-color: rgba(255, 80, 80, 0.3);
+    color: #ff6b6b;
+}
+.project-btn-demo:hover {
+    background: rgba(255, 0, 0, 0.2);
+    border-color: #ff5555;
+    color: #ff9999;
+    box-shadow: 0 4px 14px rgba(255, 0, 0, 0.25);
+}
 
 .projects-footer {
     margin-top: 20px;

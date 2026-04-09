@@ -90,29 +90,40 @@
     position: relative;
     padding-left: 30px;
 }
+/* Each card gets its own accent color via data-color attribute */
+.lead-card[data-color="indigo"]  { --card-color: #6366f1; --card-glow: rgba(99,102,241,0.25); }
+.lead-card[data-color="cyan"]    { --card-color: #06b6d4; --card-glow: rgba(6,182,212,0.25); }
+.lead-card[data-color="pink"]    { --card-color: #ec4899; --card-glow: rgba(236,72,153,0.25); }
+.lead-card[data-color="orange"]  { --card-color: #f59e0b; --card-glow: rgba(245,158,11,0.25); }
+.lead-card[data-color="green"]   { --card-color: #22c55e; --card-glow: rgba(34,197,94,0.25); }
+.lead-card[data-color="violet"]  { --card-color: #a78bfa; --card-glow: rgba(167,139,250,0.25); }
+
 .lead-card::before {
     content: '';
     position: absolute;
     left: 0; top: 0; bottom: 0;
     width: 3px;
-    background: linear-gradient(180deg, var(--accent), transparent);
+    background: linear-gradient(180deg, var(--card-color, var(--accent)), transparent);
     border-radius: 3px 0 0 3px;
 }
 .lead-card:hover {
-    border-color: var(--accent);
+    border-color: var(--card-color, var(--accent));
     transform: translateY(-3px);
-    box-shadow: 0 6px 22px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 22px var(--card-glow, rgba(99,102,241,0.2));
+    background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent);
 }
 .lead-card .role { font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; margin-bottom: 2px; color: var(--text-primary); }
-.lead-card .org { color: var(--accent-light); font-size: 0.7rem; font-weight: 500; margin-bottom: 1px; }
+.lead-card .org { color: var(--card-color, var(--accent-light)); font-size: 0.7rem; font-weight: 600; margin-bottom: 1px; }
 .lead-card .period { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); margin-bottom: 6px; }
 .lead-card .highlights { display: flex; flex-wrap: wrap; gap: 4px; }
 .lead-card .highlights span {
     padding: 2px 8px;
-    background: var(--bg-tertiary);
+    background: color-mix(in srgb, var(--card-color, var(--accent)) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--card-color, var(--accent)) 25%, transparent);
     border-radius: 4px;
     font-size: 0.62rem;
-    color: var(--text-secondary);
+    color: var(--card-color, var(--accent-light));
     font-family: var(--font-mono);
+    font-weight: 500;
 }
 
