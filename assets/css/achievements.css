@@ -1,0 +1,111 @@
+/* ============================================================
+   SECTION 05 — ACHIEVEMENTS (stats, profile cards)
+   ============================================================ */
+
+/* ===== ACHIEVEMENTS ===== */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+}
+.ach-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    transition: all var(--transition);
+}
+.ach-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.28);
+    background: var(--bg-card-hover);
+}
+.ach-card .ach-icon {
+    width: 52px; height: 52px; min-width: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+}
+.ach-card h4 { font-size: 0.96rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.ach-card p { color: var(--text-secondary); font-size: 0.8rem; line-height: 1.45; }
+.ach-card.featured {
+    grid-column: span 2;
+    background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(6,182,212,0.03));
+    border-color: rgba(99,102,241,0.2);
+}
+.ach-card.featured .ach-icon { width: 58px; height: 58px; min-width: 58px; font-size: 1.5rem; border-radius: 16px; }
+.ach-card.featured h4 { font-size: 1.08rem; }
+.ach-card.featured p { font-size: 0.84rem; }
+
+.profiles-section h3 {
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+.marquee-wrapper {
+    overflow: clip visible;
+    overflow-x: clip;
+    position: relative;
+    width: 100%;
+    padding: 6px 0;
+    mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+.marquee-track {
+    display: flex;
+    gap: 14px;
+    width: max-content;
+    animation: marquee 25s linear infinite;
+}
+.marquee-wrapper:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.profile-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    text-decoration: none;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 240px;
+    flex-shrink: 0;
+}
+.profile-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.25);
+}
+.profile-info { flex: 1; }
+.profile-card .platform { font-weight: 700; font-size: 0.82rem; color: var(--text-primary); display: block; }
+.profile-card .rating { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; display: block; margin-top: 1px; }
+.profile-card .detail { font-size: 0.66rem; color: var(--text-secondary); display: block; margin-top: 2px; }
+.profile-btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+    text-decoration: none;
+    transition: all var(--transition);
+    white-space: nowrap;
+    box-shadow: 0 3px 10px rgba(99,102,241,0.35);
+}
+.profile-btn:hover {
+    background: var(--accent-light);
+    border-color: var(--accent-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(99,102,241,0.5);
+}
+.profile-btn:active { transform: translateY(0); box-shadow: none; }
+

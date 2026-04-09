@@ -1,0 +1,48 @@
+/* ============================================================
+   RESPONSIVE OVERRIDES (load last) — tablet & mobile breakpoints
+   ============================================================ */
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+    .hero-wrapper { grid-template-columns: 1fr; }
+    .hero-code-widget { display: none; }
+    .exp-wrapper { grid-template-columns: 1fr; gap: 20px; }
+    .contact-wrapper { grid-template-columns: 1fr; gap: 28px; }
+}
+
+@media (max-width: 900px) {
+    .page { padding: 70px 12px 12px; } /* 58px mobile nav + 12px gap */
+    .page-inner { padding: 62px 24px 24px; border-radius: 20px; }
+    .section-number { font-size: 2.8rem; top: 30px; right: 24px; }
+    .section-title { font-size: 1.3rem; margin-bottom: 18px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    nav { padding: 0 20px; }
+    .hero-stats { gap: 18px; flex-wrap: wrap; }
+    .hero-stat::after { display: none; }
+    .hero-stat-value { font-size: 1.2rem; }
+    /* 4 projects → 2 on mobile */
+    .projects-grid { grid-template-columns: 1fr; gap: 12px; }
+    .project-card.desktop-only { display: none; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .achievements-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .ach-card.featured { grid-column: span 1; }
+    .certs-grid { grid-template-columns: 1fr; }
+    .cert-stats { grid-template-columns: repeat(2, 1fr); }
+    .learning-strip { flex-direction: column; align-items: flex-start; }
+    .exp-metrics { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+    .page-inner { padding: 58px 16px 16px; }
+    .hero-name { letter-spacing: -1.5px; font-size: 2rem; }
+    .hero-subtitle { font-size: 0.82rem; }
+    .hero-actions { flex-direction: column; }
+    .btn { justify-content: center; width: 100%; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .achievements-grid { grid-template-columns: 1fr; }
+    .contact-tags { justify-content: flex-start; }
+    .contact-footer { left: 20px; right: 20px; font-size: 0.62rem; }
+    .page-dots { right: 10px; gap: 8px; }
+    .page-dot { width: 6px; height: 6px; }
+}

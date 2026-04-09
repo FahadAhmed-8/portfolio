@@ -1,0 +1,118 @@
+/* ============================================================
+   SECTION 06 — LEADERSHIP (marquee row of role cards)
+   ============================================================ */
+
+/* ===== LEADERSHIP ===== */
+.leadership-featured {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(6, 182, 212, 0.04));
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition);
+}
+.leadership-featured::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.12), transparent);
+    border-radius: 50%;
+}
+.leadership-featured:hover {
+    transform: translateY(-3px);
+    border-color: rgba(99, 102, 241, 0.35);
+    box-shadow: 0 12px 40px rgba(99, 102, 241, 0.08);
+}
+.leadership-featured .role {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 3px;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 1;
+}
+.leadership-featured .org {
+    color: var(--accent-light);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+    position: relative;
+    z-index: 1;
+}
+.leadership-featured .period {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+}
+.leadership-featured ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+    z-index: 1;
+}
+.leadership-featured li {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+}
+.leadership-featured li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--accent-light);
+}
+.leadership-marquee-section h3 {
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+.leadership-marquee .marquee-track { animation: marquee 30s linear infinite; }
+.lead-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    min-width: 260px;
+    flex-shrink: 0;
+    transition: all var(--transition);
+    position: relative;
+    padding-left: 30px;
+}
+.lead-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+    border-radius: 3px 0 0 3px;
+}
+.lead-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.25);
+}
+.lead-card .role { font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; margin-bottom: 2px; color: var(--text-primary); }
+.lead-card .org { color: var(--accent-light); font-size: 0.7rem; font-weight: 500; margin-bottom: 1px; }
+.lead-card .period { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); margin-bottom: 6px; }
+.lead-card .highlights { display: flex; flex-wrap: wrap; gap: 4px; }
+.lead-card .highlights span {
+    padding: 2px 8px;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+    font-size: 0.62rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+}
+
