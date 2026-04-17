@@ -491,23 +491,60 @@
 
         /* Mobile */
         @media (max-width: 900px) {
-            nav { padding: 14px 20px; }
-            .nav-links { gap: 0; }
-            .nav-links a { padding: 6px 10px; font-size: 0.8rem; }
-            .container { padding: 0 20px; }
+            nav { padding: 12px 16px; }
+            .nav-links { gap: 2px; }
+            .nav-links a { padding: 6px 10px; font-size: 0.78rem; }
+            .nav-cta { padding: 6px 12px !important; }
+            .container { padding: 0 18px; }
+            main { padding-top: 96px; padding-bottom: 60px; }
             .about-hero {
                 grid-template-columns: 1fr;
-                gap: 40px;
-                text-align: center;
-                margin-bottom: 70px;
+                gap: 32px;
+                text-align: left;
+                margin-bottom: 56px;
             }
-            .hero-meta { justify-content: center; }
-            .avatar { width: 200px; height: 200px; }
-            .avatar-inner { font-size: 4.2rem; }
-            .philosophy { padding: 32px 28px; }
-            .philosophy p { font-size: 1.05rem; }
-            .end-cta { padding: 36px 24px; }
-            section.block { margin-bottom: 70px; }
+            .hero-meta { justify-content: flex-start; }
+            .avatar-wrap { justify-self: flex-start; }
+            .avatar { width: 160px; height: 160px; }
+            .avatar-inner { font-size: 3.4rem; }
+            h1 { font-size: 2.2rem; letter-spacing: -1.5px; }
+            .lede { font-size: 0.98rem; }
+            h2 { font-size: 1.6rem; letter-spacing: -1px; }
+            .edu-grid { grid-template-columns: 1fr; gap: 14px; }
+            .edu-card { padding: 22px; }
+            .timeline { padding-left: 26px; }
+            .t-item::before { left: -25px; }
+            .interests { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .int-card { padding: 18px; }
+            .philosophy { padding: 28px 22px; }
+            .philosophy p { font-size: 1rem; line-height: 1.55; }
+            .philosophy::before { font-size: 4rem; top: -12px; left: 18px; }
+            .end-cta { padding: 32px 20px; }
+            .end-cta h3 { font-size: 1.45rem; }
+            .end-cta p { font-size: 0.92rem; }
+            .btn-row { flex-direction: column; gap: 10px; }
+            .btn { width: 100%; justify-content: center; min-height: 46px; }
+            section.block { margin-bottom: 56px; }
+        }
+
+        /* Small phones */
+        @media (max-width: 600px) {
+            nav { padding: 10px 14px; }
+            .nav-links a { padding: 5px 8px; font-size: 0.72rem; }
+            .nav-cta { padding: 5px 10px !important; font-size: 0.72rem; }
+            .container { padding: 0 14px; }
+            .eyebrow { font-size: 0.66rem; padding: 5px 12px; }
+            h1 { font-size: 1.9rem; }
+            .lede { font-size: 0.92rem; }
+            .meta-chip { font-size: 0.76rem; padding: 7px 11px; }
+            .avatar { width: 140px; height: 140px; }
+            .avatar-inner { font-size: 2.8rem; }
+            h2 { font-size: 1.4rem; }
+            .prose p { font-size: 0.94rem; }
+            .interests { grid-template-columns: 1fr; }
+            .philosophy { padding: 24px 18px 22px; }
+            .philosophy p { font-size: 0.95rem; }
+            .end-cta h3 { font-size: 1.3rem; }
         }
 
         /* Reveal */

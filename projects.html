@@ -367,16 +367,54 @@
         .empty i { font-size: 2.4rem; margin-bottom: 16px; color: var(--text-muted); display: block; }
 
         @media (max-width: 900px) {
-            nav { padding: 14px 20px; }
-            .nav-links { gap: 0; }
-            .nav-links a { padding: 6px 10px; font-size: 0.8rem; }
-            .container { padding: 0 20px; }
+            nav { padding: 12px 16px; }
+            .nav-links { gap: 2px; }
+            .nav-links a { padding: 6px 10px; font-size: 0.78rem; }
+            .nav-cta { padding: 6px 12px !important; }
+            main { padding-top: 100px; padding-bottom: 60px; }
+            .container { padding: 0 18px; }
+            .page-hero { margin-bottom: 40px; text-align: left; }
+            .eyebrow { font-size: 0.66rem; padding: 5px 12px; }
+            h1 { font-size: 2.2rem; letter-spacing: -1.5px; margin-bottom: 14px; }
+            .lede { font-size: 0.98rem; margin: 0; }
             .filters {
                 border-radius: 14px;
                 max-width: 100%;
+                gap: 6px;
+                padding: 6px;
+                margin-bottom: 28px;
+                justify-content: flex-start;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                flex-wrap: nowrap;
+                scrollbar-width: none;
             }
-            .filter-btn { padding: 8px 14px; font-size: 0.78rem; }
-            .projects-grid { grid-template-columns: 1fr; gap: 18px; }
+            .filters::-webkit-scrollbar { display: none; }
+            .filter-btn {
+                padding: 8px 14px;
+                font-size: 0.78rem;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            .projects-grid { grid-template-columns: 1fr; gap: 16px; }
+            .card-banner { height: 130px; }
+            .card-banner i { font-size: 2.6rem; }
+            .card-body { padding: 20px; }
+            .card-body h3 { font-size: 1.12rem; }
+            .card-body p.desc { font-size: 0.9rem; }
+            .card-btns { flex-direction: column; gap: 8px; }
+            .card-btn { min-height: 44px; font-size: 0.85rem; }
+            footer { padding: 30px 20px; font-size: 0.76rem; }
+        }
+
+        @media (max-width: 600px) {
+            nav { padding: 10px 14px; }
+            .nav-links a { padding: 5px 8px; font-size: 0.72rem; }
+            .nav-cta { padding: 5px 10px !important; font-size: 0.72rem; }
+            .container { padding: 0 14px; }
+            h1 { font-size: 1.9rem; }
+            .lede { font-size: 0.92rem; }
+            .card-banner { height: 110px; }
         }
 
         .reveal {
