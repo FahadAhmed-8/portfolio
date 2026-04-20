@@ -1,40 +1,7 @@
 /* ============================================================
-   FOUNDATIONS — variables, reset, body, snap container, cursor glow, aurora background, loader, navbar, page wrapper, reveal animations, color helpers, mobile nav, page dots, particles
+   FOUNDATIONS — body, snap container, cursor glow, aurora background, loader, navbar, page wrapper, reveal animations, color helpers, mobile nav, page dots, particles.
+   (Design tokens + reset + a11y helpers live in tokens.css — load it first.)
    ============================================================ */
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #0d0d14;
-    --bg-tertiary: #1a1a24;
-    --bg-card: #14141e;
-    --bg-card-hover: #1c1c2a;
-    --text-primary: #e8e8ed;
-    --text-secondary: #9898a6;
-    --text-muted: #5a5a6e;
-    --accent: #6366f1;
-    --accent-light: #818cf8;
-    --accent-dim: rgba(99, 102, 241, 0.15);
-    --accent-glow: rgba(99, 102, 241, 0.4);
-    --green: #22c55e;
-    --green-dim: rgba(34, 197, 94, 0.15);
-    --orange: #f59e0b;
-    --orange-dim: rgba(245, 158, 11, 0.15);
-    --cyan: #06b6d4;
-    --cyan-dim: rgba(6, 182, 212, 0.15);
-    --pink: #ec4899;
-    --pink-dim: rgba(236, 72, 153, 0.15);
-    --border: rgba(255, 255, 255, 0.06);
-    --border-hover: rgba(255, 255, 255, 0.12);
-    --border-strong: rgba(255, 255, 255, 0.08);
-    --radius: 12px;
-    --radius-lg: 20px;
-    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --font-body: 'Inter', -apple-system, sans-serif;
-    --font-heading: 'Space Grotesk', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-}
 
 html, body {
     height: 100%;
@@ -327,12 +294,24 @@ nav.scrolled {
     gap: 5px;
     cursor: pointer;
     z-index: 1001;
+    /* reset UA button styles — this element is now a <button> for a11y */
+    background: transparent;
+    border: none;
+    padding: 6px;
+    color: inherit;
+    font: inherit;
+}
+.hamburger:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 3px;
+    border-radius: 6px;
 }
 .hamburger span {
     width: 24px; height: 2px;
     background: var(--text-primary);
     transition: all var(--transition);
     border-radius: 2px;
+    display: block;
 }
 .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .hamburger.active span:nth-child(2) { opacity: 0; }

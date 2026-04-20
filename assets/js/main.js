@@ -202,12 +202,16 @@ const navbar = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
 const mobileNav = document.getElementById('mobileNav');
 hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
+    const isOpen = hamburger.classList.toggle('active');
     mobileNav.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
 });
 function closeMobile() {
     hamburger.classList.remove('active');
     mobileNav.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Open menu');
 }
 window.closeMobile = closeMobile;
 

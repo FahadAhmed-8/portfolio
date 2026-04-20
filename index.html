@@ -11,7 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- ===== MODULAR STYLESHEETS ===== -->
-    <!-- Foundations: variables, reset, layout primitives, navbar, loader, background, helpers -->
+    <!-- Tokens: design vars, reset, focus ring, reduced-motion, selection (load FIRST) -->
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <!-- Buttons: shared .btn component -->
+    <link rel="stylesheet" href="assets/css/btn.css">
+    <!-- Foundations: body, snap container, aurora, loader, navbar, page wrapper, helpers -->
     <link rel="stylesheet" href="assets/css/base.css">
     <!-- Section 01: Hero -->
     <link rel="stylesheet" href="assets/css/hero.css">
@@ -69,9 +73,9 @@
             <li><a href="projects.html">Projects</a></li>
             <li><a href="#contact" class="nav-cta">Contact</a></li>
         </ul>
-        <div class="hamburger" id="hamburger">
+        <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
             <span></span><span></span><span></span>
-        </div>
+        </button>
     </nav>
 
     <div class="mobile-nav" id="mobileNav">
@@ -99,11 +103,10 @@
                         Fahad<br><span class="gradient">Ahmed.</span>
                     </h1>
                     <p class="hero-subtitle reveal reveal-delay-2">
-                        I build <strong>intelligent systems</strong> at the intersection of Data Science and Full-Stack Engineering — turning complex problems into <strong>scalable, production-grade solutions</strong>.
+                        CS undergrad at <strong>IIIT Nagpur</strong>. I build <strong>ML systems</strong> and ship them as <strong>full-stack products</strong>.
                     </p>
                     <div class="hero-actions reveal reveal-delay-3">
                         <a href="projects.html" class="btn btn-primary"><i class="fas fa-code"></i> View My Work</a>
-                        <a href="#contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> Get In Touch</a>
                         <a href="https://drive.google.com/file/d/1aNGDsYDiSae9kLmaMQL43LgjvgnbUSmO/view?usp=drive_link" target="_blank" class="btn btn-secondary"><i class="fas fa-file-alt"></i> Resume</a>
                     </div>
                     <div class="hero-stats reveal reveal-delay-4">
@@ -116,12 +119,12 @@
                             <div class="hero-stat-label">Codeforces Global</div>
                         </div>
                         <div class="hero-stat">
-                            <div class="hero-stat-value" data-count="2500">0+</div>
-                            <div class="hero-stat-label">Fest Attendees Led</div>
+                            <div class="hero-stat-value" data-count="8">0+</div>
+                            <div class="hero-stat-label">Shipped Projects</div>
                         </div>
                         <div class="hero-stat">
-                            <div class="hero-stat-value" data-count="150">0+</div>
-                            <div class="hero-stat-label">Team Members Led</div>
+                            <div class="hero-stat-value">2x</div>
+                            <div class="hero-stat-label">Hackathon Champion</div>
                         </div>
                     </div>
                 </div>
@@ -145,9 +148,8 @@
             <div class="section-label reveal">Experience</div>
             <h2 class="section-title reveal">Where I've worked.</h2>
             <div class="exp-wrapper reveal">
+                <!-- Card 1: Algo University -->
                 <div class="exp-card">
-
-                    <!-- Top row: company + date -->
                     <div class="exp-top">
                         <div class="exp-company-badge">
                             <div class="exp-company-icon"><i class="fas fa-graduation-cap"></i></div>
@@ -156,21 +158,18 @@
                                 <div class="exp-company-sub">EdTech · Remote</div>
                             </div>
                         </div>
-                        <div class="exp-period-badge">1 May 2025 — 31 Jul 2025</div>
+                        <div class="exp-period-badge">May 2025 — Jul 2025</div>
                     </div>
 
-                    <!-- Role -->
                     <div class="exp-role">Software Development Extern</div>
                     <div class="exp-type-tag">Internship / Externship</div>
 
                     <div class="exp-divider"></div>
 
-                    <!-- Description — cleaner, fewer bolds -->
                     <p class="exp-desc">
-                        Shipped CodeClash — a production competitive-programming judge used by 500+ students. Architected a three-tier microservices system: React frontend, Express REST layer, Docker-sandboxed compiler on AWS EC2 with JWT auth and RBAC. Integrated dual AI mentoring via Groq LLaMA 3.3 70B and Google Gemini. Supports C++, Python, and Java with a 2-second sandboxed execution limit.
+                        Shipped CodeClash — a production competitive-programming judge used by 500+ students. Three-tier system: React frontend, Express REST layer, Docker-sandboxed compiler on AWS EC2 with JWT auth and RBAC. Dual AI mentoring via Groq LLaMA 3.3 70B + Gemini. 2-second sandboxed exec limit for C++, Python, Java.
                     </p>
 
-                    <!-- Stats strip — inside card -->
                     <div class="exp-stats-strip">
                         <div class="exp-stat-item">
                             <div class="exp-stat-icon bg-accent"><i class="fas fa-server"></i></div>
@@ -202,13 +201,75 @@
                         </div>
                     </div>
 
-                    <!-- Buttons — clear hierarchy -->
                     <div class="exp-buttons">
                         <a href="https://code-clash-seven.vercel.app/" target="_blank" class="exp-btn-primary">
                             <i class="fas fa-external-link-alt"></i> Live Website
                         </a>
                         <a href="https://drive.google.com/file/d/1phfam616nx1uheiM0FwLC3VxW1ZNUUVp/view?usp=sharing" target="_blank" class="exp-btn-ghost">
                             <i class="fas fa-certificate"></i> Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: TantraFiesta — promoted from Leadership to Experience -->
+                <div class="exp-card">
+                    <div class="exp-top">
+                        <div class="exp-company-badge">
+                            <div class="exp-company-icon"><i class="fas fa-crown"></i></div>
+                            <div>
+                                <div class="exp-company-name">TantraFiesta</div>
+                                <div class="exp-company-sub">IIIT Nagpur · Annual Tech Fest</div>
+                            </div>
+                        </div>
+                        <div class="exp-period-badge">Aug 2025 — Nov 2025</div>
+                    </div>
+
+                    <div class="exp-role">Festival Director</div>
+                    <div class="exp-type-tag">Leadership / Operations</div>
+
+                    <div class="exp-divider"></div>
+
+                    <p class="exp-desc">
+                        Led IIIT Nagpur's flagship technical festival end-to-end as CEO — 150+ member cross-functional team across sponsorships, events, design, and operations. Drove a 40% YoY growth in footfall and delivered 29+ events (including 10 hackathons across Web3, Data Science, and Quantum Computing).
+                    </p>
+
+                    <div class="exp-stats-strip">
+                        <div class="exp-stat-item">
+                            <div class="exp-stat-icon bg-pink"><i class="fas fa-users"></i></div>
+                            <div>
+                                <div class="exp-stat-num">150+</div>
+                                <div class="exp-stat-lbl">Team Members Led</div>
+                            </div>
+                        </div>
+                        <div class="exp-stat-item">
+                            <div class="exp-stat-icon bg-orange"><i class="fas fa-ticket"></i></div>
+                            <div>
+                                <div class="exp-stat-num">2500+</div>
+                                <div class="exp-stat-lbl">Attendees</div>
+                            </div>
+                        </div>
+                        <div class="exp-stat-item">
+                            <div class="exp-stat-icon bg-green"><i class="fas fa-handshake"></i></div>
+                            <div>
+                                <div class="exp-stat-num">25+</div>
+                                <div class="exp-stat-lbl">Corporate Sponsors</div>
+                            </div>
+                        </div>
+                        <div class="exp-stat-item">
+                            <div class="exp-stat-icon bg-cyan"><i class="fas fa-calendar-check"></i></div>
+                            <div>
+                                <div class="exp-stat-num">29+</div>
+                                <div class="exp-stat-lbl">Events Delivered</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exp-buttons">
+                        <a href="https://www.linkedin.com/in/fahadwajidahmed/" target="_blank" class="exp-btn-primary">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="https://www.instagram.com/tantrafiesta/" target="_blank" class="exp-btn-ghost">
+                            <i class="fab fa-instagram"></i> Fest Highlights
                         </a>
                     </div>
                 </div>
@@ -452,64 +513,8 @@
                     </div>
                 </div>
             </div>
-            <div class="profiles-section reveal">
-                <h3>Coding Profiles</h3>
-                <div class="marquee-wrapper">
-                    <div class="marquee-track">
-                        <div class="profile-card" data-platform="leetcode">
-                            <div class="profile-icon"><img src="assets/img/leetcode.svg" alt="LC"></div>
-                            <div class="profile-info"><span class="platform">LeetCode</span><span class="rating">450+ Solved</span><span class="detail">125+ Day Streak</span></div>
-                            <a href="https://leetcode.com/u/fhd_got_adhd_303/" target="_blank" class="profile-btn">View</a>
-                        </div>
-                        <div class="profile-card" data-platform="codeforces">
-                            <div class="profile-icon"><img src="assets/img/codeforces.svg" alt="CF"></div>
-                            <div class="profile-info"><span class="platform">Codeforces</span><span class="rating">Specialist · 1489</span><span class="detail">Rank 844 · Top 2%</span></div>
-                            <a href="https://codeforces.com/profile/Talwar-baaz-fhd" target="_blank" class="profile-btn">View</a>
-                        </div>
-                        <div class="profile-card" data-platform="codechef">
-                            <div class="profile-icon"><img src="assets/img/codechef.svg" alt="CC"></div>
-                            <div class="profile-info"><span class="platform">CodeChef</span><span class="rating">★★★ 1648</span><span class="detail">Global Rank 93</span></div>
-                            <a href="https://www.codechef.com/users/gaze_rain_47" target="_blank" class="profile-btn">View</a>
-                        </div>
-                        <div class="profile-card" data-platform="gfg">
-                            <div class="profile-icon"><i class="fas fa-code"></i></div>
-                            <div class="profile-info"><span class="platform">GeeksforGeeks</span><span class="rating">Active Contributor</span><span class="detail">DSA Practice</span></div>
-                            <a href="https://www.geeksforgeeks.org/user/fahadahmedgud2pg/" target="_blank" class="profile-btn">View</a>
-                        </div>
-                        <div class="profile-card" data-platform="codolio">
-                            <div class="profile-icon"><img src="assets/img/codolio.svg" alt="Codolio"></div>
-                            <div class="profile-info"><span class="platform">Codolio</span><span class="rating">Unified Profile</span><span class="detail">All platforms tracked</span></div>
-                            <a href="https://codolio.com/profile/FahadAhmed" target="_blank" class="profile-btn">View</a>
-                        </div>
-                        <!-- Dup for infinite loop -->
-                        <div class="profile-card" data-platform="leetcode">
-                            <div class="profile-icon"><img src="assets/img/leetcode.svg" alt="LC"></div>
-                            <div class="profile-info"><span class="platform">LeetCode</span><span class="rating">450+ Solved</span><span class="detail">125+ Day Streak</span></div>
-                            <a href="https://leetcode.com/u/fhd_got_adhd_303/" target="_blank" class="profile-btn">View</a>
-                        </div>
-                        <div class="profile-card" data-platform="codeforces">
-                            <div class="profile-icon"><img src="assets/img/codeforces.svg" alt="CF"></div>
-                            <div class="profile-info"><span class="platform">Codeforces</span><span class="rating">Specialist · 1489</span><span class="detail">Rank 844 · Top 2%</span></div>
-                            <a href="https://codeforces.com/profile/Talwar-baaz-fhd" target="_blank" class="profile-btn">View</a>
-                        </div>
-                        <div class="profile-card" data-platform="codechef">
-                            <div class="profile-icon"><img src="assets/img/codechef.svg" alt="CC"></div>
-                            <div class="profile-info"><span class="platform">CodeChef</span><span class="rating">★★★ 1648</span><span class="detail">Global Rank 93</span></div>
-                            <a href="https://www.codechef.com/users/gaze_rain_47" target="_blank" class="profile-btn">View</a>
-                        </div>
-                        <div class="profile-card" data-platform="gfg">
-                            <div class="profile-icon"><i class="fas fa-code"></i></div>
-                            <div class="profile-info"><span class="platform">GeeksforGeeks</span><span class="rating">Active Contributor</span><span class="detail">DSA Practice</span></div>
-                            <a href="https://www.geeksforgeeks.org/user/fahadahmedgud2pg/" target="_blank" class="profile-btn">View</a>
-                        </div>
-                        <div class="profile-card" data-platform="codolio">
-                            <div class="profile-icon"><img src="assets/img/codolio.svg" alt="Codolio"></div>
-                            <div class="profile-info"><span class="platform">Codolio</span><span class="rating">Unified Profile</span><span class="detail">All platforms tracked</span></div>
-                            <a href="https://codolio.com/profile/FahadAhmed" target="_blank" class="profile-btn">View</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Coding-profiles marquee removed: platform stats already live in the
+                 achievement cards above and the social bar on the Contact page. -->
         </div>
     </div>
 
@@ -519,18 +524,10 @@
             <div class="section-number">06</div>
             <div class="section-label reveal">Leadership</div>
             <h2 class="section-title reveal">Beyond the code.</h2>
-            <div class="leadership-featured reveal">
-                <div class="role">Head of TantraFiesta</div>
-                <div class="org">IIIT Nagpur — Annual Technical Fest</div>
-                <div class="period">Aug 2025 — Nov 2025</div>
-                <ul>
-                    <li>Directed a 150+ member team as CEO of IIIT Nagpur's flagship technical festival</li>
-                    <li>Organized 29+ events and 10 hackathons across Web3, Data Science, and Quantum Computing</li>
-                    <li>Secured 25+ corporate sponsorships and drove 2,500+ attendees (40% increase)</li>
-                </ul>
-            </div>
+            <!-- TantraFiesta moved up to the Experience section. This page now
+                 highlights the supporting club roles only. -->
             <div class="leadership-marquee-section reveal">
-                <h3>Other Roles</h3>
+                <h3>Roles Held</h3>
                 <div class="marquee-wrapper leadership-marquee">
                     <div class="marquee-track">
                         <div class="lead-card" data-color="cyan"><div class="role">Co-Head, Probe Club</div><div class="org">Media & Photography — IIIT Nagpur</div><div class="period">Aug 2024 — May 2025</div><div class="highlights"><span>40+ Members</span><span>Media Strategy</span></div></div>
